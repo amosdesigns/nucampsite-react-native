@@ -15,7 +15,7 @@ const DirectoryScreen = (props) => {
   };
   return (
     <FlatList
-      data={patchWebProps.campsites}
+      data={props.campsites}
       renderItem={renderDirectoryItem}
       keyExtractor={(item) => item.id.toString()}
     />
