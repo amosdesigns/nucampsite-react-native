@@ -3,8 +3,8 @@ import Constants from "expo-constants";
 import CampsiteInfoScreen from "./CampsiteInfoScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import DirectoryScreen from "./DirectoryScreen";
-import HomeScreen from './HomeScreen';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from "./HomeScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Drawer = createDrawerNavigator();
 const screenOptions = {
@@ -18,10 +18,9 @@ const HomeNavigator = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator
-      screenOptions={screenOptions}
-    >
+    <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
+        screenOptions={screenOptions}
         name="Home"
         component={HomeScreen}
         options={{ title: "Home" }}
@@ -34,10 +33,7 @@ const DirectoryNavigator = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator
-      initialRouteName="Directory"
-      screenOptions={screenOptions}
-    >
+    <Stack.Navigator initialRouteName="Directory" screenOptions={screenOptions}>
       <Stack.Screen
         name="Directory"
         component={DirectoryScreen}
@@ -62,7 +58,6 @@ const Main = () => {
         paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
       }}
     >
-      <DirectoryNavigator>
         <Drawer.Navigator
           initialRouteName="Home"
           drawerStyle={{
@@ -70,18 +65,18 @@ const Main = () => {
           }}
         >
           <Drawer.Screen
-            name='Home'
+            name="Home"
             component={HomeNavigator}
-            options={{ title: 'Home' }} />
-          
+            options={{ title: "Home" }}
+          />
+
           <Drawer.Screen
-            name='Directory'
+            name="Directory"
             component={DirectoryNavigator}
-            options={{ title: 'Directory' }} />
-          
+            options={{ title: "Directory" }}
+          />
         </Drawer.Navigator>
-        
-      </DirectoryNavigator>
+     
     </View>
   );
 };
