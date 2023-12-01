@@ -21,10 +21,10 @@ const RenderCampsite = ({ campsite, isFavorite, markFavorite }) => {
         </Card.Image>
         <Text style={{ margin: 20 }}>{campsite.description}</Text>
         <Icon
-          name="heart-o" //{isFavorite ? "heart" : "heart-o"}
+          name={isFavorite ? "heart" : "heart-o"}
           type="font-awesome"
           color="#f50"
-          // onPress={() => markFavorite()}
+          onPress={() => markFavorite()}
           raised
           reverse
         />

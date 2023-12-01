@@ -5,7 +5,7 @@ import { COMMENTS } from "../shared/comments";
 
 const CampsiteInfoScreen = ({ route }) => {
   const { campsite } = route.params;
-  
+
   const [favorite, setFavorite] = useState(false);
   const [comments, setComments] = useState(COMMENTS);
 
@@ -37,7 +37,7 @@ const CampsiteInfoScreen = ({ route }) => {
           <RenderCampsite
             campsite={campsite}
             isFavorite={favorite}
-            markFavorite={() => setFavorite(true)}
+            markFavorite={() => setFavorite(!favorite)}
           />
           <Text style={styles.commentsTitle}>Comments</Text>
         </>
