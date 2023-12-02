@@ -4,7 +4,7 @@ import { Text, View, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
 
 const FeaturedItem = ( { item } ) => {
-  
+ 
   if (item) {
     return (
       <Card containerStyle={{ padding: 0 }}>
@@ -37,7 +37,7 @@ const HomeScreen = () => {
   const campsites = useSelector((state) => state.campsites);
   const promotions = useSelector((state) => state.promotions);
   const partners = useSelector((state) => state.partners);
-
+ 
   const featCampsite = campsites.campsitesArray.find((item) => item.featured);
   const featPromotion = promotions.promotionsArray.find(
     (item) => item.featured
@@ -52,4 +52,5 @@ const HomeScreen = () => {
     </ScrollView>
   );
 };
+
 export default HomeScreen;

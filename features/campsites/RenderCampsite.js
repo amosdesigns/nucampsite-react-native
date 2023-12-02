@@ -1,11 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Card, Icon } from "react-native-elements";
+import { baseURL } from "../../shared/baseURL";
 
-const RenderCampsite = ({ campsite, isFavorite, markFavorite }) => {
+const RenderCampsite = ( { campsite, isFavorite, markFavorite } ) => {
+  console.log(`${baseURL}${campsite.image}`);
   if (campsite) {
     return (
       <Card containerStyle={styles.cardContainer}>
-        <Card.Image source={campsite.image}>
+        <Card.Image source={{ uri: `${baseURL}${campsite.image}` }}>
           <View style={{ justifyContent: "center", flex: 1 }}>
             <Text
               style={{

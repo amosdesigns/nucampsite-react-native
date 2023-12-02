@@ -29,6 +29,7 @@ const screenOptions = {
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
+
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
@@ -52,6 +53,7 @@ const HomeNavigator = () => {
 
 const AboutNavigator = () => {
   const Stack = createStackNavigator();
+
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
@@ -74,6 +76,7 @@ const AboutNavigator = () => {
 
 const ContactNavigator = () => {
   const Stack = createStackNavigator();
+  
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
