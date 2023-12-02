@@ -1,3 +1,9 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchPartners } from "../features/partners/partnersSlice";
+import { fetchCampsites } from "../features/campsites/campsitesSlice";
+import { fetchPromotions } from "../features/promotions/promotionsSlice";
+import { fetchComments } from "../features/comments/commentsSlice";
 import { Image, Text, Platform, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 import CampsiteInfoScreen from "./CampsiteInfoScreen";
@@ -133,6 +139,14 @@ const CustomDrawerContent = (props) => (
 );
 
 const Main = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPartners());
+    dispatch(fetchCampsites());
+    dispatch(fetchPromotions());
+    dispatch(fetchComments());
+  }, [dispatch]);
+
   return (
     <View
       style={{

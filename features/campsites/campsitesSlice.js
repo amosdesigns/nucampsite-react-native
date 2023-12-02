@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseUrl } from "../../../shared/baseUrl";
+//import { baseURL } from "../../shared/baseURL";
 
 export const fetchCampsites = createAsyncThunk(
   "campsites/fetchCampsites",
   async () => {
-    const response = await fetch(baseUrl + "campsites");
+    const response = await fetch(`http://192.168.86.43:3001/${campsites}`);
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
