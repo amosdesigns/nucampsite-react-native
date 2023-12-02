@@ -1,4 +1,4 @@
-import { Image,Text,Platform, StyleSheet, View } from "react-native";
+import { Image, Text, Platform, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 import CampsiteInfoScreen from "./CampsiteInfoScreen";
 import DirectoryScreen from "./DirectoryScreen";
@@ -6,13 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList
+  DrawerItemList,
 } from "@react-navigation/drawer";
 import HomeScreen from "./HomeScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
 import { Icon } from "react-native-elements";
-import logo  from '../assets/logo.png';
+import logo from "../assets/logo.png";
 
 const Drawer = createDrawerNavigator();
 
@@ -118,17 +118,17 @@ const DirectoryNavigator = () => {
     </Stack.Navigator>
   );
 };
-const CustomDrawerContent = ( props ) => (
+const CustomDrawerContent = (props) => (
   <DrawerContentScrollView {...props}>
     <View style={styles.drawerHeader}>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <Image source={logo} style={styles.drawerImage} />
       </View>
-      <View style={{flex:2}}>
+      <View style={{ flex: 2 }}>
         <Text style={styles.drawerHeaderText}>NuCamp</Text>
       </View>
     </View>
-    <DrawerItemList {...props} labelStyle={{fontWeight: 'bold'}} />
+    <DrawerItemList {...props} labelStyle={{ fontWeight: "bold" }} />
   </DrawerContentScrollView>
 );
 
@@ -214,7 +214,7 @@ const Main = () => {
   );
 };
 
-const styles = StyleSheet.create( {
+const styles = StyleSheet.create({
   drawerHeader: {
     backgroundColor: "#5637DD",
     height: 140,
