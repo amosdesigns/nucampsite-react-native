@@ -1,6 +1,7 @@
 import { ScrollView, Text } from "react-native";
 import { Avatar, Card, ListItem } from "react-native-elements";
 import { useSelector } from "react-redux";
+import Loading from "../components/LoadingComponent";
 import { baseURL } from "../shared/baseURL";
 
 function Mission() {
@@ -22,7 +23,32 @@ function Mission() {
 }
 
 const AboutScreen = () => {
-  const partners = useSelector((state) => state.partners);
+  const partners = useSelector( ( state ) => state.partners );
+  
+  if (partners.isLoading) {
+    return (
+      <ScrollView>
+        <Mission />
+        <Card>
+          <Card.Title>Community Partners</Card.Title>
+          <Card.Divider />
+          <Loading />
+        </Card>
+      </ScrollView>
+    );
+  }
+  if (partners.errMess) {
+    return (
+      <ScrollView>
+        <Mission />
+        <Card>
+          <Card.Title>Community Partners</Card.Title>
+          <Card.Divider />
+          <Text>{partners.errMess}</Text>
+        </Card>
+      </ScrollView>
+    );
+  }
 
   return (
     <ScrollView>
@@ -35,7 +61,7 @@ const AboutScreen = () => {
             <Avatar rounded source={{ uri: `${baseURL}${partner.image}` }} />
             <ListItem.Content>
               <ListItem.Title>
-                {partner.name} -{baseURL}{partner.image}
+                {partner.name}
               </ListItem.Title>
               <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
             </ListItem.Content>
