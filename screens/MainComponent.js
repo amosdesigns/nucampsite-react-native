@@ -127,6 +127,7 @@ const DirectoryNavigator = () => {
     </Stack.Navigator>
   );
 };
+
 const CustomDrawerContent = (props) => (
   <DrawerContentScrollView {...props}>
     <View style={styles.drawerHeader}>
