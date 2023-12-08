@@ -3,7 +3,7 @@ import { Card, Icon } from "react-native-elements";
 import { baseURL } from "../../shared/baseURL";
 
 const RenderCampsite = ( { campsite, isFavorite, markFavorite } ) => {
-  console.log(`${baseURL}${campsite.image}`);
+  
   if (campsite) {
     return (
       <Card containerStyle={styles.cardContainer}>
