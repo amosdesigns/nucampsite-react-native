@@ -13,11 +13,11 @@ const DirectoryScreen = ({ navigation }) => {
         caption={campsite.description}
         featured
         onPress={() => navigation.navigate("CampsiteInfo", { campsite })}
-        imageSrc={{ uri: `${baseURL}${campsite.image}`}}
+        imageSrc={{ uri: `${baseURL}${campsite.image}` }}
       />
     );
   };
-  console.log(campsites);
+
   return (
     <FlatList
       data={campsites.campsitesArray}

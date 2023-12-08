@@ -7,7 +7,7 @@ const RenderCampsite = ( { campsite, isFavorite, markFavorite } ) => {
   if (campsite) {
     return (
       <Card containerStyle={styles.cardContainer}>
-        <Card.Image source={{ uri: `${baseURL}${campsite.image}` }}>
+        <Card.Image source={{ uri: `${baseURL}${campsite.image}`}}>
           <View style={{ justifyContent: "center", flex: 1 }}>
             <Text
               style={{
