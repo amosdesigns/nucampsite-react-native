@@ -4,7 +4,7 @@ import { baseURL } from "../../shared/baseURL";
 export const fetchComments = createAsyncThunk(
   "comments/fetchComments",
   async () => {
-    const response = await fetch();`${baseURL}${comments}`
+    const response = await fetch(`${baseURL}comments`);
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
