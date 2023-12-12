@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { Avatar, ListItem } from "react-native-elements";
 import Loading from "../components/LoadingComponent";
+import { baseURL } from "../shared/baseURL";
 import { SwipeRow } from "react-native-swipe-list-view";
 import { toggleFavorite } from "../features/favorites/favoritesSlice";
-import * as Animatable from "react-native-animatable";
 
 const FavoritesScreen = ({ navigation }) => {
   const { campsitesArray, isLoading, errMess } = useSelector(
@@ -59,7 +59,7 @@ const FavoritesScreen = ({ navigation }) => {
               })
             }
           >
-            <Avatar rounded source={campsite.image} />
+            <Avatar rounded source={{ uri: baseURL + campsite.image }} />
             <ListItem.Content>
               <ListItem.Title>{campsite.name}</ListItem.Title>
               <ListItem.Subtitle>{campsite.description}</ListItem.Subtitle>
@@ -81,15 +81,13 @@ const FavoritesScreen = ({ navigation }) => {
     );
   }
   return (
-    <Animatable.View animation="fadeInRightBig" duration={2000}>
-      <FlatList
-        data={campsitesArray.filter((campsite) =>
-          favorites.includes(campsite.id)
-        )}
-        renderItem={renderFavoriteItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </Animatable.View>
+    <FlatList
+      data={campsitesArray.filter((campsite) =>
+        favorites.includes(campsite.id)
+      )}
+      renderItem={renderFavoriteItem}
+      keyExtractor={(item) => item.id.toString()}
+    />
   );
 };
 
