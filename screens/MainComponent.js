@@ -17,6 +17,7 @@ import {
 import HomeScreen from "./HomeScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
+import FavoritesScreen from "./FavoritesScreen";
 import { Icon } from "react-native-elements";
 import logo from "../assets/images/logo.png";
 import ReservationScreen from "./ReservationScreen";
@@ -74,6 +75,30 @@ const HomeNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const FavoritesNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={({ navigation }) => ({
+          title: "Favorite Campsites",
+          headerLeft: () => (
+            <Icon
+              name="heart"
+              type="font-awesome"
+              iconStyle={styles.stackIcon}
+              onPress={() => navigation.toggleDrawer()}
+            />
+          ),
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 
 const AboutNavigator = () => {
   const Stack = createStackNavigator();
@@ -227,6 +252,22 @@ const Main = () => {
             drawerIcon: ({ color }) => (
               <Icon
                 name="tree"
+                type="font-awesome"
+                size={24}
+                iconStyle={{ width: 24 }}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Favorites"
+          component={FavoritesNavigator}
+          options={{
+            title: "My Favorites",
+            drawerIcon: ({ color }) => (
+              <Icon
+                name="heart"
                 type="font-awesome"
                 size={24}
                 iconStyle={{ width: 24 }}
