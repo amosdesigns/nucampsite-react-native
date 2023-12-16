@@ -8,31 +8,31 @@ import { postComment } from "../features/comments/commentsSlice";
 import * as Animatable from "react-native-animatable";
 
 const CampsiteInfoScreen = ({ route }) => {
-const { campsite } = route.params;
-const comments = useSelector((state) => state.comments);
-const favorites = useSelector((state) => state.favorites);
-const [showModal, setShowModal] = useState(false);
-const [rating, setRating] = useState(5);
-const [author, setAuthor] = useState("");
-const [text, setText] = useState("");
-const dispatch = useDispatch();
-  
-   const handleSubmit = () => {
-     const newComment = {
-       author,
-       rating,
-       text,
-       campsiteId: campsite.id,
-     };
-     dispatch(postComment(newComment));
-     setShowModal(!showModal);
-   };
+  const { campsite } = route.params;
+  const comments = useSelector((state) => state.comments);
+  const favorites = useSelector((state) => state.favorites);
+  const [showModal, setShowModal] = useState(false);
+  const [rating, setRating] = useState(5);
+  const [author, setAuthor] = useState("");
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
-   const resetForm = () => {
-     setRating(5);
-     setAuthor("");
-     setText("");
-   };
+  const handleSubmit = () => {
+    const newComment = {
+      author,
+      rating,
+      text,
+      campsiteId: campsite.id,
+    };
+    dispatch(postComment(newComment));
+    setShowModal(!showModal);
+  };
+
+  const resetForm = () => {
+    setRating(5);
+    setAuthor("");
+    setText("");
+  };
 
   const renderCommentItem = ({ item }) => {
     return (
@@ -58,9 +58,7 @@ const dispatch = useDispatch();
           (comment) => comment.campsiteId === campsite.id
         )}
         renderItem={renderCommentItem}
-        keyExtractor={(item) => {
-          item.id.toString();
-        }}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{
           marginHorizontal: 20,
           paddingVertical: 20,
@@ -133,16 +131,16 @@ const dispatch = useDispatch();
 
 const styles = StyleSheet.create({
   commentsTitle: {
+    textAlign: "center",
+    backgroundColor: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-    backgroundColor: "#fff",
+    color: "#43484D",
     padding: 10,
     paddingTop: 30,
-    textAlign: "center",
-    color: "#43484d",
   },
   commentItem: {
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: "#fff",
   },
