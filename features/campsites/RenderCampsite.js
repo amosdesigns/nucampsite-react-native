@@ -10,7 +10,8 @@ const RenderCampsite = (props) => {
   const view = useRef();
 
   const isLeftSwipe = ({ dx }) => dx < -200;
-
+  const isRightSwipe = ( { dx } ) => dx > 200;
+  
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderGrant: () => {
@@ -42,9 +43,24 @@ const RenderCampsite = (props) => {
           ],
           { cancelable: false }
         );
+      } else if (isRightSwipe(gestureState)) {
+        props.onShowModal();
       }
     },
   });
+
+ const shareCampsite = (title, message, url) => {
+   Share.share(
+     {
+       title,
+       message: `${title}: ${message} ${url}`,
+       url,
+     },
+     {
+       dialogTitle: "Share " + title,
+     }
+   );
+ };
 
   if (campsite) {
     return (
@@ -83,6 +99,7 @@ const RenderCampsite = (props) => {
               reverse
               onPress={props.onShowModal}
             />
+            
           </View>
         </Card>
       </Animatable.View>
