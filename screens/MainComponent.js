@@ -4,7 +4,15 @@ import { fetchPartners } from "../features/partners/partnersSlice";
 import { fetchCampsites } from "../features/campsites/campsitesSlice";
 import { fetchPromotions } from "../features/promotions/promotionsSlice";
 import { fetchComments } from "../features/comments/commentsSlice";
-import { Image, Text, Platform, StyleSheet, View } from "react-native";
+import {
+  Image,
+  Text,
+  Platform,
+  StyleSheet,
+  View,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import Constants from "expo-constants";
 import CampsiteInfoScreen from "./CampsiteInfoScreen";
 import DirectoryScreen from "./DirectoryScreen";
@@ -14,7 +22,6 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/core"; 
 import HomeScreen from "./HomeScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
@@ -23,6 +30,8 @@ import LoginScreen from "./LoginScreen";
 import ReservationScreen from "./ReservationScreen";
 import { Icon } from "react-native-elements";
 import logo from "../assets/images/logo.png";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/core";
+import NetInfo from "@react-native-community/netinfo";
 
 const Drawer = createDrawerNavigator();
 
@@ -108,11 +117,15 @@ const LoginNavigator = () => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={( { navigation, route } ) => ( {
+        options={({ navigation, route }) => ({
           headerTitle: getFocusedRouteNameFromRoute(route),
           headerLeft: () => (
             <Icon
-              name={getFocusedRouteNameFromRoute(route) === "Regiter" ? 'user-plus' : 'sign-in'}
+              name={
+                getFocusedRouteNameFromRoute(route) === "Regiter"
+                  ? "user-plus"
+                  : "sign-in"
+              }
               type="font-awesome"
               iconStyle={styles.stackIcon}
               onPress={() => navigation.toggleDrawer()}
@@ -223,6 +236,44 @@ const Main = () => {
     dispatch(fetchPromotions());
     dispatch(fetchComments());
   }, [dispatch]);
+
+  useEffect(() => {
+    NetInfo.fetch().then((connectionInfo) => {
+      Platform.OS === "ios"
+        ? Alert.alert("Initial Network Connectivity Type:", connectionInfo.type)
+        : ToastAndroid.show(
+            "Initial Network Connectivity Type: " + connectionInfo.type,
+            ToastAndroid.LONG
+          );
+    });
+
+    const unsubscribeNetInfo = NetInfo.addEventListener((connectionInfo) => {
+      handleConnectivityChange(connectionInfo);
+    });
+
+    return unsubscribeNetInfo;
+  }, []);
+
+  const handleConnectivityChange = (connectionInfo) => {
+    let connectionMsg = "You are now connected to an active network.";
+    switch (connectionInfo.type) {
+      case "none":
+        connectionMsg = "No network connection is active.";
+        break;
+      case "unknown":
+        connectionMsg = "The network connection state is now unknown.";
+        break;
+      case "cellular":
+        connectionMsg = "You are now connected to a cellular network.";
+        break;
+      case "wifi":
+        connectionMsg = "You are now connected to a WiFi network.";
+        break;
+    }
+    Platform.OS === "ios"
+      ? Alert.alert("Connection change:", connectionMsg)
+      : ToastAndroid.show(connectionMsg, ToastAndroid.LONG);
+  };
 
   return (
     <View
