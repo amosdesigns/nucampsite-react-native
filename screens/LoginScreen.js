@@ -4,6 +4,7 @@ import { CheckBox, Input, Button, Icon } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as ImagePicker from "expo-image-picker";
+import { baseURL } from "../shared/baseURL";
 import logo from "../assets/images/logo.png";
 
 const LoginTab = ({ navigation }) => {
@@ -109,9 +110,7 @@ const RegisterTab = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [remember, setRemember] = useState(false);
-  const [imageUrl, setImageUrl] = useState(
-    require("../assets/images/logo.png")
-  );
+  const [imageUrl, setImageUrl] = useState(baseURL + "images/logo.png");
 
   const handleRegister = () => {
     const userInfo = {
@@ -146,9 +145,9 @@ const RegisterTab = () => {
         allowsEditing: true,
         aspect: [1, 1],
       });
-      if (!capturedImage.cancelled) {
-        console.log(capturedImage);
-        setImageUrl(capturedImage.uri);
+      if (capturedImage.assets) {
+        console.log(capturedImage.assets[0]);
+        setImageUrl(capturedImage.assets[0].uri);
       }
     }
   };
