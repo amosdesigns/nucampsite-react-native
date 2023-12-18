@@ -238,15 +238,7 @@ const Main = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    NetInfo.fetch().then((connectionInfo) => {
-      Platform.OS === "ios"
-        ? Alert.alert("Initial Network Connectivity Type:", connectionInfo.type)
-        : ToastAndroid.show(
-            "Initial Network Connectivity Type: " + connectionInfo.type,
-            ToastAndroid.LONG
-          );
-    });
-
+    showNetInfo();
     const unsubscribeNetInfo = NetInfo.addEventListener((connectionInfo) => {
       handleConnectivityChange(connectionInfo);
     });
@@ -254,8 +246,22 @@ const Main = () => {
     return unsubscribeNetInfo;
   }, []);
 
+  const showNetInfo = async () => {
+    await NetInfo.fetch().then((connectionInfo) => {
+      Platform.OS === "ios"
+        ? Alert.alert(
+            "Intial network Connectivity Type: " + connectionInfo.type
+          )
+        : ToastAndroid.show(
+            //2 args, text to show, and duration
+            "Initial network Connectivity Type: " + connectionInfo.type,
+            ToastAndroid.LONG
+          );
+    });
+  };
+
   const handleConnectivityChange = (connectionInfo) => {
-    let connectionMsg = "You are now connected to an active network.";
+    let connectionMsg = "You are now connected to an active netwrok.";
     switch (connectionInfo.type) {
       case "none":
         connectionMsg = "No network connection is active.";
@@ -271,7 +277,7 @@ const Main = () => {
         break;
     }
     Platform.OS === "ios"
-      ? Alert.alert("Connection change:", connectionMsg)
+      ? Alert.alert("Conneciton change:", connectionMsg)
       : ToastAndroid.show(connectionMsg, ToastAndroid.LONG);
   };
 
